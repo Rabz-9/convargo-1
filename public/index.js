@@ -36,6 +36,7 @@ var deliveries = [{
   'price': 0,
   'commission': {
     'insurance': 0,
+    'treasury' : 0,
     'convargo': 0
   }
 }, {
@@ -50,6 +51,7 @@ var deliveries = [{
   'price': 0,
   'commission': {
     'insurance': 0,
+    'treasury' : 0,
     'convargo': 0
   }
 }, {
@@ -64,6 +66,7 @@ var deliveries = [{
   'price': 0,
   'commission': {
     'insurance': 0,
+    'treasury' : 0,
     'convargo': 0
   }
 }];
@@ -185,3 +188,25 @@ function decreasePrice()
   }
 }
 decreasePrice();
+
+function ConvargoCommission()
+{
+  for(var i = 0 ; i< Object.keys(deliveries).length ; i++)
+  {
+    // 30% of the commission
+    var commission = deliveries[i]['price']*0.3;
+    deliveries[i]['commission']['insurance'] = commission*0.5;
+    // Update the general commission
+    commission = commission*0.5;
+    //Treasury
+    var euroByRange = Math.ceil(deliveries[i]['distance'] / 500);
+    deliveries[i]['commission']['treasury'] = euroByRange;
+    //Update the general commission
+    commission = commission - euroByRange;
+
+    //Convargo take the rest of the ConvargoCommission
+    deliveries[i]['commission']['convargo'] = commission;
+    console.log(deliveries[i]['commission']);
+  }
+}
+ConvargoCommission();
