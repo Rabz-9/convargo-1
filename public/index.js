@@ -144,3 +144,13 @@ const actors = [{
 console.log(truckers);
 console.log(deliveries);
 console.log(actors);
+
+function updateShippingPrice()
+{
+  for(var i = 0 ; i < Object.keys(deliveries).length ; i ++)
+  {
+    deliveries[i]['price'] = deliveries[i]['distance']  + deliveries[i]['volume'];
+    console.log(deliveries[i]['price'])
+  }
+}
+updateShippingPrice();
