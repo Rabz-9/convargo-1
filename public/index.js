@@ -210,3 +210,18 @@ function ConvargoCommission()
   }
 }
 ConvargoCommission();
+
+function deductibleReduction()
+{
+  for(var i = 0 ; i < Object.keys(deliveries).length ; i++)
+  {
+    if(deliveries[i]['options']['deductibleReduction'] == true)
+    {
+      var additionalCharged = deliveries[i]['volume'];
+      deliveries[i]['commission']['convargo'] += additionalCharged;
+      deliveries[i]['price'] += additionalCharged;
+    }
+  }
+}
+deductibleReduction();
+console.log(deliveries);
