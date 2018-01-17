@@ -97,7 +97,7 @@ const actors = [{
     'amount': 0
   }]
 }, {
-  'rentalId': '65203b0a-a864-4dea-81e2-e389515752a8',
+  'deliveryId': '65203b0a-a864-4dea-81e2-e389515752a8',
   'payment': [{
     'who': 'shipper',
     'type': 'debit',
@@ -120,7 +120,7 @@ const actors = [{
     'amount': 0
   }]
 }, {
-  'rentalId': '94dab739-bd93-44c0-9be1-52dd07baa9f6',
+  'deliveryId': '94dab739-bd93-44c0-9be1-52dd07baa9f6',
   'payment': [{
     'who': 'shipper',
     'type': 'debit',
@@ -222,3 +222,31 @@ function deductibleReduction()
 }
 deductibleReduction();
 console.log(deliveries);
+
+function getIdDeliveries(idDelivery)
+{
+  for(var i = 0 ; i < Object.keys(deliveries).length ; i++)
+  {
+    if(deliveries[i]['id'] == idDelivery)
+    {
+      return i;
+    }
+  }
+}
+
+function Facturation()
+{
+  for(var i = 0 ; i<Object.keys(actors).length ; i++)
+  {
+    var idDelivery = getIdDeliveries(actors[i]['deliveryId']);
+    var price = deliveries[idDelivery]['price'];
+    actors[i]['payment'][0]['amount'] = price;
+    actors[i]['payment'][1]['amount'] = price * 0.7;
+    actors[i]['payment'][2]['amount'] = deliveries[idDelivery]['commission']['insurance'];
+    actors[i]['payment'][3]['amount'] = deliveries[idDelivery]['commission']['treasury'];
+    actors[i]['payment'][4]['amount'] = deliveries[idDelivery]['commission']['convargo'];
+  }
+}
+
+Facturation();
+console.log(actors);
