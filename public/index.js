@@ -149,8 +149,18 @@ function updateShippingPrice()
 {
   for(var i = 0 ; i < Object.keys(deliveries).length ; i ++)
   {
-    deliveries[i]['price'] = deliveries[i]['distance']  + deliveries[i]['volume'];
-    console.log(deliveries[i]['price'])
+    var pricePerKm = 0;
+    var pricePerVolume = 0;
+    for(var j = 0 ; j < Object.keys(truckers).length ; j++)
+    {
+      if(deliveries[i]['truckerId'] == truckers[j]["id"])
+      {
+        pricePerKm = truckers[i]['pricePerKm'];
+        pricePerVolume = truckers[i]['pricePerVolume'];
+      }
+    }
+    deliveries[i]['price'] = deliveries[i]['distance']* pricePerKm + deliveries[i]['volume']*pricePerVolume;
+    console.log("Shipping price : " + deliveries[i]['price']);
   }
 }
 updateShippingPrice();
