@@ -154,3 +154,24 @@ function updateShippingPrice()
   }
 }
 updateShippingPrice();
+
+function decreasePrice()
+{
+  for(var i = 0 ; i<Object.keys(deliveries).length ; i++)
+  {
+    if(deliveries[i]['volume'] > 25)
+    {
+      deliveries[i]['price'] = deliveries[i]['price']*0.5;
+    }
+    else if(deliveries[i]['volume'] > 10)
+    {
+      deliveries[i]['price'] = deliveries[i]['price']*0.7;
+    }
+    else if(deliveries[i]['volume'] > 5)
+    {
+      deliveries[i]['price'] = deliveries[i]['price'] * 0.9;
+    }
+    console.log("New price after updating with the volume :  " + deliveries[i]['price'])
+  }
+}
+decreasePrice();
