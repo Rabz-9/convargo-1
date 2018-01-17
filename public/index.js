@@ -162,32 +162,29 @@ function updateShippingPrice()
         pricePerVolume = truckers[i]['pricePerVolume'];
       }
     }
-    deliveries[i]['price'] = deliveries[i]['distance']* pricePerKm + deliveries[i]['volume']*pricePerVolume;
+    deliveries[i]['price'] = deliveries[i]['distance']* pricePerKm + deliveries[i]['volume']*pricePerVolume*decreasePrice(i);
     console.log("Shipping price : " + deliveries[i]['price']);
   }
 }
 updateShippingPrice();
 
-function decreasePrice()
+function decreasePrice(i)
 {
-  for(var i = 0 ; i<Object.keys(deliveries).length ; i++)
-  {
     if(deliveries[i]['volume'] > 25)
     {
-      deliveries[i]['price'] = deliveries[i]['price']*0.5;
+      return 0.5;
     }
     else if(deliveries[i]['volume'] > 10)
     {
-      deliveries[i]['price'] = deliveries[i]['price']*0.7;
+      return 0.7;
     }
     else if(deliveries[i]['volume'] > 5)
     {
-      deliveries[i]['price'] = deliveries[i]['price'] * 0.9;
+      return  0.9;
     }
-    console.log("New price after updating with the volume :  " + deliveries[i]['price'])
-  }
+    return 1;
 }
-decreasePrice();
+//decreasePrice();
 
 function ConvargoCommission()
 {
