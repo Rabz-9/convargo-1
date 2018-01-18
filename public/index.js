@@ -130,11 +130,11 @@ const actors = [{
     'type': 'credit',
     'amount': 0
   }, {
-    'who': 'treasury',
+    'who': 'insurance',
     'type': 'credit',
     'amount': 0
   }, {
-    'who': 'insurance',
+    'who': 'treasury',
     'type': 'credit',
     'amount': 0
   }, {
